@@ -22,6 +22,13 @@ var play_state = {
         towers.enableBody = true;
         this.game.physics.enable(towers, Phaser.Physics.ARCADE);
 
+        // Adiciona botao de iniciar para iniciar a onda
+        this.startWaveButton = this.game.add.button(650, 50, 'start', this.newWave, this, 1, 0, 1);
+        this.startWaveButton.scale.set(0.3);
+        this.startWaveButton.anchor.setTo(0.5,0.5);
+        this.startWaveButton.inputEnabled = true;
+        this.startWaveButton.input.useHandCursor = true;
+
     },
 
     update: function() {
@@ -31,6 +38,19 @@ var play_state = {
     restart_game: function() {
         // Voltar para o estado 'menu'
         this.game.state.start('menu');
+    },
+
+    newWave: function() {
+        var i = 0;
+        var monstersBlock = setInterval(function() {
+            console.log(i);
+            if (i < 3) {
+                new Monster(3, 3*i+3, 'logo', 1, 1, 1);
+                i++;
+            } else {
+                clearTimeout(monstersBlock);
+            }
+        }, 1000);
     },
 
 };

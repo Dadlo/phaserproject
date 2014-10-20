@@ -18,11 +18,11 @@ var Tower = function(xTile, yTile, sprite, damage, range, fireRate, health, imor
     // Se a torre pode ser atingida
     this.tower.imortal = imortal;
     // Define os métodos da torre
-    tower.prototype.place(this.monster);
-    tower.prototype.setPosition(this.monster);
-    tower.prototype.attack(this.monster);
-    tower.prototype.damageTaken(this.monster);
-    tower.prototype.death(this.monster);
+    //tower.prototype.place(this.monster);
+    //tower.prototype.setPosition(this.monster);
+    //tower.prototype.attack(this.monster);
+    //tower.prototype.damageTaken(this.monster);
+    //tower.prototype.death(this.monster);
 
 }
 

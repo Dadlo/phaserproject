@@ -1,6 +1,7 @@
 var Monster = function(xTile, yTile, sprite, spriteLength, speed, damage) {
     // Adiciona sprite na posicao
     this.monster = game.add.sprite(xTile * tilesize, yTile * tilesize, sprite);
+    this.monster.scale.set(0.2);
     // Adiciona animacao de andar em relacao ao sprite adicionado
     this.monster.animations.add('walk');
     this.monster.animations.play('walk', spriteLength, true);
@@ -17,11 +18,11 @@ var Monster = function(xTile, yTile, sprite, spriteLength, speed, damage) {
     // Adiciona o monstro no grupo de monstros
     monsters.add(this.monster);
     // Declara metodos da classe monstro
-    monster.prototype.move(this.monster);
-    monster.prototype.attack(this.monster);
-    monster.prototype.nextMove(this.monster);
-    monster.prototype.damageTaken(this.monster);
-    monster.prototype.death(this.monster);
+    //monster.prototype.move(this.monster);
+    //monster.prototype.attack(this.monster);
+    //monster.prototype.nextMove(this.monster);
+    //monster.prototype.damageTaken(this.monster);
+    //monster.prototype.death(this.monster);
 }
 
 Monster.prototype.move = function(monster) {

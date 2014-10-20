@@ -3,7 +3,7 @@ var boot_state = {
 
     preload: function() {
 
-        this.load.image('preloader', '../assets/sprites/loading.gif');
+        this.load.image('preloader', '../../assets/sprites/loading.gif');
 
     },
 
