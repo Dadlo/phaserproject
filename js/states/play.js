@@ -1,19 +1,15 @@
 var play_state = {
 
     create: function() { 
-
-
+        // Inicia a fisica do jogo
         this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
+        // Cria e aplica o tile map
         map = this.game.add.tilemap('jsonmap');
-
-        map.addTilesetImage('Nome do Mapa', 'tilesmap');
-
-        layer = map.createLayer('Nome da Layer');
-
+        map.addTilesetImage('Desert', 'tilesmap');
+        layer = map.createLayer('Ground');
         layer.resizeWorld();
-
-
+        //layer.debug = true;
     },
 
     update: function() {
