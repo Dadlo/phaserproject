@@ -1,6 +1,9 @@
 var play_state = {
 
     create: function() { 
+        // Declaracao de variaveis
+        tilesize = 32; // tamanho do tile para validacao de posicao
+
         // Inicia a fisica do jogo
         this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
@@ -10,6 +13,15 @@ var play_state = {
         layer = map.createLayer('Ground');
         layer.resizeWorld();
         //layer.debug = true;
+
+        // Cria grupo de monstros e de torres
+        monsters = this.game.add.group();
+        monsters.enableBody = true;
+        this.game.physics.enable(monsters, Phaser.Physics.ARCADE);
+        towers = this.game.add.group();
+        towers.enableBody = true;
+        this.game.physics.enable(towers, Phaser.Physics.ARCADE);
+
     },
 
     update: function() {
