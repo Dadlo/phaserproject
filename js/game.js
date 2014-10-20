@@ -1,18 +1,11 @@
-window.onload = function() {
+// Inicializa Phaser
+var game = new Phaser.Game(800, 600, Phaser.AUTO, 'towerDefense');
 
-    var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create });
+// Define os estados
+game.state.add('boot', boot_state);
+game.state.add('preload', load_state);
+game.state.add('menu', menu_state);
+game.state.add('play', play_state);
 
-    function preload () {
-
-        game.load.image('logo', 'assets/logo/phaser.png');
-
-    }
-
-    function create () {
-
-        var logo = game.add.sprite(game.world.centerX, game.world.centerY, 'logo');
-        logo.anchor.setTo(0.5, 0.5);
-
-    }
-
-};
+// Inicia com o estado 'load'
+game.state.start('boot');
