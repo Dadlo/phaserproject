@@ -14,7 +14,11 @@ var play_state = {
         layer.resizeWorld();
         //layer.debug = true;
 
-        tilePath = [{x:1, y:1}, {x:2, y:1}, {x:2, y:2}, {x:2, y:3}, {x:2, y:4}, {x:2, y:5}, {x:2, y:6}];
+        tilePath = [{x:1, y:1}, {x:2, y:1}, {x:2, y:2}, {x:2, y:3}, {x:2, y:4}, {x:2, y:5}, {x:2, y:6},
+        {x:3, y:6}, {x:4, y:6}, {x:5, y:6}, {x:6, y:6}, {x:7, y:6}, {x:8, y:6}, {x:9, y:6}, {x:10, y:6},
+        {x:10, y:7}, {x:11, y:7}, {x:12, y:7}, {x:13, y:7}, {x:13, y:8}, {x:14, y:8}, {x:15, y:8}, {x:16, y:8},
+        {x:16, y:9}, {x:16, y:10}, {x:17, y:10}, {x:18, y:10}, {x:19, y:10}, {x:20, y:10}, {x:20, y:11}, {x:21, y:11},
+        {x:22, y:11}, {x:23, y:11}, {x:24, y:11}, {x:25, y:11}, {x:26, y:11}, {x:27, y:11}, {x:28, y:11}, {x:29, y:11}];
 
         // Cria grupo de monstros e de torres
         monsters = this.game.add.group();
@@ -47,9 +51,8 @@ var play_state = {
     newWave: function() {
         var i = 0;
         var monstersBlock = setInterval(function() {
-            //console.log(i);
             if (i < 5) {
-                new Monster(1, 0, 'logo', 1, 1, 1);
+                new Monster(1, 0, 'person', 1, 1, 1);
                 i++;
             } else {
                 clearTimeout(monstersBlock);

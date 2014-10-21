@@ -10,7 +10,8 @@ var load_state = {
 
         this.game.stage.backgroundColor = '#222222';
         this.game.load.image('logo', '../../assets/logo/phaser.png');
-        this.game.load.spritesheet('start', '../../assets/sprites/startsprite.png',481, 193,2);
+        this.game.load.spritesheet('start', '../../assets/sprites/startsprite.png',481,193,2);
+        this.game.load.spritesheet('person', '../../assets/sprites/person.png',32,32,4);
 
         this.game.load.tilemap('jsonmap', '../../assets/tilemaps/desert.json', null, Phaser.Tilemap.TILED_JSON);
         this.game.load.image('tilesmap', '../../assets/tilemaps/tmw_desert_spacing.png');

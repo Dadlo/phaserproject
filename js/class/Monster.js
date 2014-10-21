@@ -1,10 +1,10 @@
 var Monster = function(xTile, yTile, sprite, spriteLength, speed, damage) {
     // Adiciona sprite na posicao
     this.monster = game.add.sprite(xTile * tileSize, yTile * tileSize, sprite);
-    this.monster.scale.set(0.2);
+    this.monster.scale.set(1);
     // Adiciona animacao de andar em relacao ao sprite adicionado
-    this.monster.animations.add('walk');
-    this.monster.animations.play('walk', spriteLength, true);
+    this.monster.animations.add('run');
+    this.monster.animations.play('run', spriteLength*4, true);
     // ancora no centro de cada sprite
     this.monster.anchor.setTo(0.5, 0.5);
     // Controle de velocidade global, x e y
@@ -53,7 +53,6 @@ Monster.prototype.nextMove = function(monster) {
     if (monster.tile < tilePath.length-1) {
         monster.tile++;
     }
-    console.log(monster.tile);
     monster.nextPosX = parseInt(tilePath[monster.tile].x * tileSize);
     monster.nextPosY = parseInt(tilePath[monster.tile].y * tileSize);
     if (monster.nextPosX > monster.x) {
