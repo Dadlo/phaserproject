@@ -38,6 +38,7 @@ var Monster = function(xTile, yTile, sprite, spriteLength, speed, damage, health
     this.monster.lifeBarStatus.beginFill(0x00FF00, 0.9) // cor, alfa
     this.monster.lifeBarStatus.drawRect(this.monster.x-this.monster.width/2, this.monster.y-this.monster.height/2, this.monster.width, 5); // x, y, largura, altura
 
+
     // Inicia movimentacao
     Monster.prototype.nextMove(this.monster);
     Monster.prototype.move(this.monster);
@@ -68,12 +69,13 @@ Monster.prototype.move = function(monster) {
     // Atualiza a barra de vida
     monster.lifeBar.x = monster.x-monster.width;
     monster.lifeBar.y = monster.y-monster.height/2;
-
+    // Atualiza posicao da barra de vida atual
     monster.lifeBarStatus.x = monster.x-monster.width;
     monster.lifeBarStatus.y = monster.y-monster.height/2;
-    damTaken = monster.lifeBarStatus.width * (monster.health/monster.totalHealth);
-    console.log(damTaken);
-    monster.lifeBarStatus.width = monster.lifeBarStatus.width - damTaken;
+    // Calcula o dano tomado - escala e posiciona a barra de vida atual
+    damTaken = monster.health/monster.totalHealth;
+    monster.lifeBarStatus.scale.x = damTaken;
+    monster.lifeBarStatus.x += (1-(monster.health/monster.totalHealth))*monster.width/2;
 
 }
 

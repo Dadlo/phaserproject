@@ -46,7 +46,7 @@ Wave.prototype.begin = function(wave) {
             // Para cada um dentro da quantidade definida em amount
             if (i < wave.monsterSprite[j].amount) {
                 // Cria o monstro com o sprite especifico
-                new Monster(1, 0, wave.monsterSprite[j].sprite, 1, 1, 1, 100);
+                new Monster(1, 0, wave.monsterSprite[j].sprite, 1, 1, 1, 150);
                 i++;
             } else {
                 j++;
