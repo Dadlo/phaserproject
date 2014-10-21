@@ -33,13 +33,23 @@ Tower.prototype.setPosition = function(pointer, sprite, damage, range, fireRate,
 Tower.prototype.attack = function(tower) {
     if (game.time.now > tower.lastShot) {
         // TODO - Atirar
+        targets = [];
         monsters.forEach(function(monster) {
             if (monster.yTile - tower.yTile < tower.range && monster.xTile - tower.xTile < tower.range) {
-                console.log("pew");
+                targets.push(monster); // lista todos os alvos no range
             }
         }); 
+        // TODO - AI da Torre para escolher qual alvo atirar
+        if (targets.length>0){
+            Tower.prototype.fire(tower,targets[0]);
+        }
         tower.lastShot = game.time.now + tower.fireRate;
     }
+}
+
+Tower.prototype.fire = function(tower, monster) {
+    //Bullet = function (startX, startY, destX, destY, speed, damage, shooter, sprite)
+    console.log("pew");
 }
 
 Tower.prototype.damageTaken = function(tower, monster) {

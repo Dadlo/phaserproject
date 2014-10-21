@@ -13,8 +13,8 @@ var Bullet = function (startX, startY, destX, destY, speed, damage, shooter, spr
 Bullet.prototype.setVelocVector = function (bullet) {
     //o phaser comeca a deslocar o objeto com veloc constante
     //normaliza
-    var distX = bullet.destX - bullet.startX,
-    var distY = bullet.destY - bullet.startY;
+    distX = bullet.destX - bullet.startX,
+    distY = bullet.destY - bullet.startY;
     
     if (distX > distY) {
         bullet.body.velocity.set(distX / Math.abs(distX) * bullet.speed,
