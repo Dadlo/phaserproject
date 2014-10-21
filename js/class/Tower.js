@@ -40,7 +40,7 @@ Tower.prototype.attack = function(tower) {
         // TODO - Atirar
         targets = [];
         monsters.forEach(function(monster) {
-            if (monster.yTile - tower.yTile < tower.range && monster.xTile - tower.xTile < tower.range) {
+            if (Math.abs(tilePath[monster.tile].y - tower.yTile) < tower.range && Math.abs(tilePath[monster.tile].x - tower.xTile) < tower.range ) {
                 targets.push(monster); // lista todos os alvos no range
             }
         }); 

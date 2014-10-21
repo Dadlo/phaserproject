@@ -48,7 +48,6 @@ Monster.prototype.move = function(monster) {
     monster.x += monster.speedX;
     monster.y += monster.speedY;
 
-
     if (monster.speedX > 0 && monster.x >= monster.nextPosX) {
         monster.x = monster.nextPosX;
         Monster.prototype.nextMove(monster);
@@ -72,7 +71,7 @@ Monster.prototype.move = function(monster) {
 
     monster.lifeBarStatus.x = monster.x-monster.width;
     monster.lifeBarStatus.y = monster.y-monster.height/2;
-    monster.lifeBarStatus.width = monster.lifeBarStatus.width * (monster.totalHealth / monster.health);
+    monster.lifeBarStatus.width = monster.lifeBarStatus.width * monster.totalHealth / monster.health;
 
 }
 
@@ -111,5 +110,9 @@ Monster.prototype.damageTaken = function(monster) {
 }
 
 Monster.prototype.death = function(monster) {
-    // TODO
+    if (monster.health<=0){
+        monster.destroy();
+        monsters.remove(monster);
+    }
+    score += 1;
 }

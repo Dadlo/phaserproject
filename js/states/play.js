@@ -109,6 +109,9 @@ var play_state = {
         towers.forEach(function(tower) {
             Tower.prototype.attack(tower);
         });
+
+        // Verifica colisao da bala com monstro
+        this.game.physics.arcade.overlap(bullets, monsters, this.collisionChecker, null, this);
     },
 
     restartGame: function() {
@@ -122,6 +125,15 @@ var play_state = {
         // Pode intercalar e repetir monstros e sequencias
         // Ele deixa um espaço vazio entre cada item da onda
         new Wave([{sprite:'person', amount:3},{sprite:'person', amount:2}], 5000, 1000, 250);
+    },
+
+    collisionChecker: function(bullet, monster) {
+        // destroi a bala
+        bullet.kill();
+        // tira o dano do monstro
+        monster.health -= bullet.damage;
+        // manda o monstro verificar se morreu
+        Monster.prototype.death(monster);
     },
 
 };
