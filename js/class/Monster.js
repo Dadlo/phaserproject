@@ -1,6 +1,6 @@
 var Monster = function(xTile, yTile, sprite, spriteLength, speed, damage) {
     // Adiciona sprite na posicao
-    this.monster = game.add.sprite(xTile * tilesize, yTile * tilesize, sprite);
+    this.monster = game.add.sprite(xTile * tileSize, yTile * tileSize, sprite);
     this.monster.scale.set(0.2);
     // Adiciona animacao de andar em relacao ao sprite adicionado
     this.monster.animations.add('walk');
@@ -14,21 +14,35 @@ var Monster = function(xTile, yTile, sprite, spriteLength, speed, damage) {
     // Recebe o dano que o monstro causara nas barreiras
     this.monster.damage = damage;
     // Tile em que o monstro esta
-    this.monster.tile = 0;
+    this.monster.tile = -1;
     // Adiciona o monstro no grupo de monstros
     monsters.add(this.monster);
-    // Declara metodos da classe monstro
-    //monster.prototype.move(this.monster);
-    //monster.prototype.attack(this.monster);
-    //monster.prototype.nextMove(this.monster);
-    //monster.prototype.damageTaken(this.monster);
-    //monster.prototype.death(this.monster);
+    // Inicia movimentacao
+    Monster.prototype.nextMove(this.monster);
+    Monster.prototype.move(this.monster);
 }
 
 Monster.prototype.move = function(monster) {
     // TODO
     monster.x += monster.speedX;
     monster.y += monster.speedY;
+
+    if (monster.speedX > 0 && monster.x >= monster.nextPosX) {
+        monster.x = monster.nextPosX;
+        Monster.prototype.nextMove(monster);
+    }
+    else if (monster.speedX < 0 && monster.x <= monster.nextPosX) {
+        monster.x = monster.nextPosX;
+        Monster.prototype.nextMove(monster);
+    }
+    else if (monster.speedY > 0 && monster.y >= monster.nextPosY) {
+        monster.y = monster.nextPosY;
+        Monster.prototype.nextMove(monster);
+    }
+    else if (monster.speedY < 0 && monster.y <= monster.nextPosY) {
+        monster.y = monster.nextPosY;
+        Monster.prototype.nextMove(monster);
+    }
 }
 
 Monster.prototype.attack = function(monster) {
@@ -36,8 +50,30 @@ Monster.prototype.attack = function(monster) {
 }
 
 Monster.prototype.nextMove = function(monster) {
-    // TODO
-    monster.tile++;
+    if (monster.tile < tilePath.length-1) {
+        monster.tile++;
+    }
+    console.log(monster.tile);
+    monster.nextPosX = parseInt(tilePath[monster.tile].x * tileSize);
+    monster.nextPosY = parseInt(tilePath[monster.tile].y * tileSize);
+    if (monster.nextPosX > monster.x) {
+        monster.speedX = monster.speed;
+        monster.angle = 0;
+    } else if (monster.nextPosX < monster.x) {
+        monster.speedX = -monster.speed;
+        monster.angle = 180;
+    } else {
+        monster.speedX = 0;
+    }
+    if (monster.nextPosY > monster.y) {
+        monster.speedY = monster.speed;
+        monster.angle = 90;
+    } else if (monster.nextPosY < monster.y) {
+        monster.speedY = -monster.speed;
+        monster.angle = -90;
+    } else {
+        monster.speedY = 0;
+    }
 }
 
 Monster.prototype.damageTaken = function(monster) {

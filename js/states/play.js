@@ -2,7 +2,7 @@ var play_state = {
 
     create: function() { 
         // Declaracao de variaveis
-        tilesize = 32; // tamanho do tile para validacao de posicao
+        tileSize = 32; // tamanho do tile para validacao de posicao
 
         // Inicia a fisica do jogo
         this.game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -13,6 +13,8 @@ var play_state = {
         layer = map.createLayer('Ground');
         layer.resizeWorld();
         //layer.debug = true;
+
+        tilePath = [{x:1, y:1}, {x:2, y:1}, {x:2, y:2}, {x:2, y:3}, {x:2, y:4}, {x:2, y:5}, {x:2, y:6}];
 
         // Cria grupo de monstros e de torres
         monsters = this.game.add.group();
@@ -32,7 +34,9 @@ var play_state = {
     },
 
     update: function() {
-        //   
+        monsters.forEach(function(monster) {
+            Monster.prototype.move(monster);
+        });  
     },
 
     restart_game: function() {
@@ -43,9 +47,9 @@ var play_state = {
     newWave: function() {
         var i = 0;
         var monstersBlock = setInterval(function() {
-            console.log(i);
-            if (i < 3) {
-                new Monster(3, 3*i+3, 'logo', 1, 1, 1);
+            //console.log(i);
+            if (i < 5) {
+                new Monster(1, 0, 'logo', 1, 1, 1);
                 i++;
             } else {
                 clearTimeout(monstersBlock);
