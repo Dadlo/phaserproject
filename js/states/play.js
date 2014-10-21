@@ -35,6 +35,14 @@ var play_state = {
         this.startWaveButton.inputEnabled = true;
         this.startWaveButton.input.useHandCursor = true;
 
+        // Adiciona botao de voltar ao menu
+        this.stopButton = this.game.add.button(650, 140, 'start', this.restartGame, this, 1, 0, 1);
+        this.stopButton.scale.set(0.3);
+        this.stopButton.tint = 0xff00ff;
+        this.stopButton.anchor.setTo(0.5,0.5);
+        this.stopButton.inputEnabled = true;
+        this.stopButton.input.useHandCursor = true;
+
     },
 
     update: function() {
@@ -43,7 +51,7 @@ var play_state = {
         });  
     },
 
-    restart_game: function() {
+    restartGame: function() {
         // Voltar para o estado 'menu'
         this.game.state.start('menu');
     },
