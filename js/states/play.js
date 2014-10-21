@@ -16,7 +16,6 @@ var play_state = {
     // - tela de derrota - hj inexistente
     // - tela de credito - hj inexistente
     // - reset do jogo completo com limpesa dos sprites e variaveis - hj inutil
-    // - excluir balas ao sair do mapa - hj inexistente
     // - ajustar o preloader - hj com gif circular e nao barra
     // - criar dentro do estado de play os estados de inclusao de torre e de ondas - trabalhar com o tempo de onda - hj inexistente
     // - criar sistema de upgrade para torres // acredito que remover a torre atual e aplicar uma nova com as novas prorpiedades seja o melhor - hj inexistente
@@ -54,13 +53,23 @@ var play_state = {
         {x:16, y:9}, {x:16, y:10}, {x:17, y:10}, {x:18, y:10}, {x:19, y:10}, {x:20, y:10}, {x:20, y:11}, {x:21, y:11},
         {x:22, y:11}, {x:23, y:11}, {x:24, y:11}, {x:25, y:11}, {x:26, y:11}, {x:27, y:11}, {x:28, y:11}, {x:29, y:11}];
 
-        // Cria grupo de monstros e de torres
+        // Cria grupo de monstros
         monsters = this.game.add.group();
         monsters.enableBody = true;
         this.game.physics.enable(monsters, Phaser.Physics.ARCADE);
+
+        // Cria grupo de torres
         towers = this.game.add.group();
         towers.enableBody = true;
         this.game.physics.enable(towers, Phaser.Physics.ARCADE);
+
+        // Cria grupo de balas
+        bullets = this.game.add.group();
+        bullets.enableBody = true;
+        this.game.physics.enable(bullets, Phaser.Physics.ARCADE);
+        bullets.setAll('outOfBoundsKill', true);
+        bullets.setAll('checkWorldBounds', true);
+        bullets.setAll('anchor.x', 0.5);
 
         // Adiciona botao de iniciar para iniciar a onda
         this.startWaveButton = this.game.add.button(650, 50, 'start', this.newWave, this, 1, 0, 1);
