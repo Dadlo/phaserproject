@@ -1,4 +1,4 @@
-var Tower = function(xTile, yTile, sprite, damage, range, fireRate, health, imortal) {
+var Tower = function(xTile, yTile, sprite, damage, range, fireRate, health, imortal, bulletSpeed, bulletSprite) {
     // Adiciona a sprite da torre
     this.tower = game.add.sprite(xTile * tileSize, yTile * tileSize, sprite);
     // Salva tile em que está
@@ -13,6 +13,10 @@ var Tower = function(xTile, yTile, sprite, damage, range, fireRate, health, imor
     // Tempo entre os tiros
     this.tower.fireRate = fireRate;
     this.tower.lastShot = game.time.now;
+    // recebe velocidade do tiro
+    this.tower.bulletSpeed = bulletSpeed;
+    // recebe sprite do tiro
+    this.tower.bulletSprite = bulletSprite;
     // Adiciona a torre no grupo de torres
     towers.add(this.tower);
     // Se a torre pode ser atingida
@@ -24,10 +28,10 @@ Tower.prototype.place = function(pointer) {
     game.input.onDown.add(Tower.prototype.setPosition, this);
 }
 
-Tower.prototype.setPosition = function(pointer, sprite, damage, range, fireRate, health) {
+Tower.prototype.setPosition = function(pointer, sprite, damage, range, fireRate, health, imortal, bulletSpeed, bulletSprite) {
     var xTile = ( pointer.worldX - (pointer.worldX % tileSize) ) / tileSize;
     var yTile = ( pointer.worldY - (pointer.worldY % tileSize) ) / tileSize;
-    new Tower(xTile, yTile, sprite, damage, range, fireRate)
+    new Tower(xTile, yTile, sprite, damage, range, fireRate, imortal, bulletSpeed, bulletSprite);
 }
 
 Tower.prototype.attack = function(tower) {
@@ -49,7 +53,7 @@ Tower.prototype.attack = function(tower) {
 
 Tower.prototype.fire = function(tower, monster) {
     //Bullet = function (startX, startY, destX, destY, speed, damage, shooter, sprite)
-    console.log("pew");
+    new Bullet(tower.x, tower.y, tower.bulletSpeed, tower.damage, tower, tower.bulletSprite);
 }
 
 Tower.prototype.damageTaken = function(tower, monster) {

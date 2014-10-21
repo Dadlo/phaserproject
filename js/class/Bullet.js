@@ -1,5 +1,5 @@
 var Bullet = function (startX, startY, destX, destY, speed, damage, shooter, sprite) {
-    this.bullet = this.game.add.sprite(startX, startY, sprite);
+    this.bullet = game.add.sprite(startX, startY, sprite);
     this.bullet.startX = startX;
     this.bullet.startY = startY;
     this.bullet.destX = destX;
@@ -7,6 +7,7 @@ var Bullet = function (startX, startY, destX, destY, speed, damage, shooter, spr
     this.bullet.speed = speed;
     this.bullet.damage = damage;
     this.bullet.shooter = shooter;
+    game.physics.enable(this.bullet, Phaser.Physics.ARCADE);
     Bullet.prototype.setVelocVector(this.bullet);
 };
 
@@ -15,7 +16,6 @@ Bullet.prototype.setVelocVector = function (bullet) {
     //normaliza
     distX = bullet.destX - bullet.startX,
     distY = bullet.destY - bullet.startY;
-    
     if (distX > distY) {
         bullet.body.velocity.set(distX / Math.abs(distX) * bullet.speed,
                                       distY / Math.abs(distX) * bullet.speed);

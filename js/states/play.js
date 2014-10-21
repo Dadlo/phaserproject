@@ -57,7 +57,7 @@ var play_state = {
 
 
         // Adiciona uma torre para teste
-        new Tower(3,3,'tower', 50, 4, 1500, 1000, true);
+        new Tower(3,3,'tower', 50, 4, 1500, 1000, true, 2, 'tower');
     },
 
     update: function() {
