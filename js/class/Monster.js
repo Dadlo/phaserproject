@@ -1,4 +1,7 @@
-var Monster = function(xTile, yTile, sprite, spriteLength, speed, damage) {
+var Monster = function(xTile, yTile, sprite, spriteLength, speed, damage, health) {
+    // TODO - definir velocidade - dano e vida de acordo com a sprite enviada, ou trocar sprite
+    // pelo nome do monstro e pegar os dados de uma lista global
+
     // Adiciona sprite na posicao
     this.monster = game.add.sprite(xTile * tileSize, yTile * tileSize, sprite);
     this.monster.scale.set(1);
@@ -7,6 +10,9 @@ var Monster = function(xTile, yTile, sprite, spriteLength, speed, damage) {
     this.monster.animations.play('run', spriteLength*4, true);
     // ancora no centro de cada sprite
     this.monster.anchor.setTo(0.5, 0.5);
+    // define a vida do monstro
+    this.monster.health = health; // vida atual do monstro
+    this.monster.totalHealth = health; // vida maxima do monstro
     // Controle de velocidade global, x e y
     this.monster.speedX = 0;
     this.monster.speedY = 0;
@@ -17,6 +23,19 @@ var Monster = function(xTile, yTile, sprite, spriteLength, speed, damage) {
     this.monster.tile = -1;
     // Adiciona o monstro no grupo de monstros
     monsters.add(this.monster);
+
+    // Desenha um retângulo cheio sobre cada personagem
+    this.monster.lifeBar = game.add.graphics(0, 0); // inicia o retangulo
+    this.monster.lifeBar.lineStyle(2, 0x000000, 1); // largura, cor, alfa
+    this.monster.lifeBar.beginFill(0xFFFF00, 0.8) // cor, alfa
+    this.monster.lifeBar.drawRect(this.monster.x-this.monster.width/2, this.monster.y-this.monster.height/2, this.monster.width, 5); // x, y, largura, altura
+
+    // Desenha um retângulo de vida sobre cada personagem
+    this.monster.lifeBarStatus = game.add.graphics(0, 0); // inicia o retangulo
+    this.monster.lifeBarStatus.lineStyle(2, 0x000000, 0); // largura, cor, alfa
+    this.monster.lifeBarStatus.beginFill(0x00FF00, 0.9) // cor, alfa
+    this.monster.lifeBarStatus.drawRect(this.monster.x-this.monster.width/2, this.monster.y-this.monster.height/2, this.monster.width, 5); // x, y, largura, altura
+
     // Inicia movimentacao
     Monster.prototype.nextMove(this.monster);
     Monster.prototype.move(this.monster);
@@ -26,6 +45,7 @@ Monster.prototype.move = function(monster) {
     // TODO
     monster.x += monster.speedX;
     monster.y += monster.speedY;
+
 
     if (monster.speedX > 0 && monster.x >= monster.nextPosX) {
         monster.x = monster.nextPosX;
@@ -43,6 +63,15 @@ Monster.prototype.move = function(monster) {
         monster.y = monster.nextPosY;
         Monster.prototype.nextMove(monster);
     }
+
+    // Atualiza a barra de vida
+    monster.lifeBar.x = monster.x-monster.width;
+    monster.lifeBar.y = monster.y-monster.height/2;
+
+    monster.lifeBarStatus.x = monster.x-monster.width;
+    monster.lifeBarStatus.y = monster.y-monster.height/2;
+    monster.lifeBarStatus.width = monster.lifeBarStatus.width * (monster.totalHealth / monster.health);
+
 }
 
 Monster.prototype.attack = function(monster) {

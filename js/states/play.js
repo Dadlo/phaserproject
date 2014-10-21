@@ -48,6 +48,13 @@ var play_state = {
         this.stopButton.inputEnabled = true;
         this.stopButton.input.useHandCursor = true;
 
+        // Desenha um retângulo de menu de botões na parte inferior
+        var shape = this.game.add.graphics(0, 0); // inicia o retangulo
+        shape.lineStyle(2, 0x000000, 0.8); // largura, cor, alfa
+        shape.beginFill(0x222222, 0.8) // cor, alfa
+        shape.drawRect(0, (this.game.height/5)*4, this.game.width, this.game.height/5); // x, y, largura, altura
+        shape.endFill();
+
     },
 
     update: function() {
