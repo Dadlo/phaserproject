@@ -110,9 +110,13 @@ Monster.prototype.damageTaken = function(monster) {
 }
 
 Monster.prototype.death = function(monster) {
-    if (monster.health<=0){
+    if (monster.health <= 0) {
+        // destroi a sprite de monstro
         monster.destroy();
         monsters.remove(monster);
+        // remove a barra de vida do monstro
+        monster.lifeBarStatus.destroy();
+        monster.lifeBar.destroy();
     }
     score += 1;
 }
