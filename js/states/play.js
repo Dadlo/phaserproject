@@ -1,5 +1,34 @@
 var play_state = {
 
+    // TODO PRINCIPAL
+    // - criar base a ser defendida com vida - hj inexistente
+    // - verificar colisao das balas com os monstros - hj inexistente
+    // - criar criterio de morte para os monstros - hj inexistente - ja existe vida e valor de dano
+    // - criar mecanismo de adicionar torres - ja existe classe de torre - apenas funcionalidade de clique
+    // - criar lista de monstros com sprite, forca, vida etc - hj hard coded
+    // - criar lista de niveis com detalhes das ondas - hj unico
+    // - criar mecanismo de evolucao dentro dos niveis - hj unico
+    // - levar para classe propria a leitura do tileMap para simplificar o uso de varios mapas - hj unico
+    // - condicao de vitoria da onda - hj inexistente
+    // - condicao de vitoria do jogo - hj inexistente
+    // - condicao de derrota do jogo - hj inexistente
+    // - splash screen - hj inexistente
+    // - tela de derrota - hj inexistente
+    // - tela de credito - hj inexistente
+    // - reset do jogo completo com limpesa dos sprites e variaveis - hj inutil
+    // - excluir balas ao sair do mapa - hj inexistente
+    // - ajustar o preloader - hj com gif circular e nao barra
+    // - criar dentro do estado de play os estados de inclusao de torre e de ondas - trabalhar com o tempo de onda - hj inexistente
+    // - criar sistema de upgrade para torres // acredito que remover a torre atual e aplicar uma nova com as novas prorpiedades seja o melhor - hj inexistente
+    // - criar sistema de caixa de selecao para o upgrade das torres - hj inexistente
+    // - criar textos de contador de tempo para proxima onda - hj inexistente
+    // - criar textos de pontuacao atual - hj inexistente
+    // - criar textos de onda atual - hj inexistente
+    // - criar texto de level atual - com do mapa - hj inexistente
+
+    // - Caso tudo seja atingido verificar de utilizar pathfinding a star ao inves de mapear o caminho manualmente
+
+
     create: function() { 
         // Declaracao de variaveis
         tileSize = 32; // tamanho do tile para validacao de posicao
@@ -41,6 +70,7 @@ var play_state = {
         this.startWaveButton.input.useHandCursor = true;
 
         // Adiciona botao de voltar ao menu
+        // TODO - remover os objetos e limpar dados antes de voltar
         this.stopButton = this.game.add.button(650, 140, 'start', this.restartGame, this, 1, 0, 1);
         this.stopButton.scale.set(0.3);
         this.stopButton.tint = 0xff00ff;

@@ -21,6 +21,7 @@ var Tower = function(xTile, yTile, sprite, damage, range, fireRate, health, imor
     towers.add(this.tower);
     // Se a torre pode ser atingida
     this.tower.imortal = imortal;
+    this.tower.upgrade = 0;
 
 }
 
