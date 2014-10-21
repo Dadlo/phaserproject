@@ -53,7 +53,7 @@ Tower.prototype.attack = function(tower) {
 
 Tower.prototype.fire = function(tower, monster) {
     //Bullet = function (startX, startY, destX, destY, speed, damage, shooter, sprite)
-    new Bullet(tower.x, tower.y, tower.bulletSpeed, tower.damage, tower, tower.bulletSprite);
+    new Bullet(tower.x, tower.y, monster.x, monster.y, tower.bulletSpeed, tower.damage, tower, tower.bulletSprite);
 }
 
 Tower.prototype.damageTaken = function(tower, monster) {

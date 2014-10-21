@@ -16,6 +16,7 @@ Bullet.prototype.setVelocVector = function (bullet) {
     //normaliza
     distX = bullet.destX - bullet.startX,
     distY = bullet.destY - bullet.startY;
+    console.log(distX);
     if (distX > distY) {
         bullet.body.velocity.set(distX / Math.abs(distX) * bullet.speed,
                                       distY / Math.abs(distX) * bullet.speed);
