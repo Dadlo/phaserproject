@@ -1,9 +1,9 @@
 var Tower = function(xTile, yTile, sprite, damage, range, fireRate, health, imortal, bulletSpeed, bulletSprite) {
     // Adiciona a sprite da torre
-    this.tower = game.add.sprite(xTile * tileSize, yTile * tileSize, sprite);
+    this.tower = game.add.sprite(xTile- (xTile % tileSize), yTile - (yTile % tileSize), sprite);
     // Salva tile em que está
-    this.tower.xTile = xTile;
-    this.tower.yTile = yTile;
+    this.tower.xTile = ( xTile- (xTile % tileSize) ) / tileSize;
+    this.tower.yTile = ( yTile - (yTile % tileSize) ) / tileSize;
     // Dano que a torre causa
     this.tower.damage = damage;
     // Area que a torre atingre
@@ -23,16 +23,6 @@ var Tower = function(xTile, yTile, sprite, damage, range, fireRate, health, imor
     this.tower.imortal = imortal;
     this.tower.upgrade = 0;
 
-}
-
-Tower.prototype.place = function(pointer) {
-    game.input.onDown.add(Tower.prototype.setPosition, this);
-}
-
-Tower.prototype.setPosition = function(pointer, sprite, damage, range, fireRate, health, imortal, bulletSpeed, bulletSprite) {
-    var xTile = ( pointer.worldX - (pointer.worldX % tileSize) ) / tileSize;
-    var yTile = ( pointer.worldY - (pointer.worldY % tileSize) ) / tileSize;
-    new Tower(xTile, yTile, sprite, damage, range, fireRate, imortal, bulletSpeed, bulletSprite);
 }
 
 Tower.prototype.attack = function(tower) {

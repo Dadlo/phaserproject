@@ -2,7 +2,6 @@ var play_state = {
 
     // TODO PRINCIPAL
     // - criar base a ser defendida com vida - hj inexistente
-    // - acertar bug de morte dos monstros - provavelmente da destruicao dos objetos sendo lidos nos grupos
     // - criar mecanismo de adicionar torres - ja existe classe de torre - apenas funcionalidade de clique
     // - criar lista de monstros com sprite, forca, vida etc - hj hard coded
     // - criar lista de niveis com detalhes das ondas - hj unico
@@ -93,9 +92,31 @@ var play_state = {
         shape.drawRect(0, (this.game.height/5)*4, this.game.width, this.game.height/5); // x, y, largura, altura
         shape.endFill();
 
+        // Desenha os botes de adicionar torre
+        // Torre Tipo 1
+        tower1Static = game.add.sprite(96, 512, 'tower');
+        tower1 = game.add.sprite(96, 512, 'tower');
+        tower1.inputEnabled = true;
+        tower1.input.enableDrag();
+        tower1.input.enableSnap(32, 32, true, true);
+        tower1.events.onDragStop.add(this.onDragStop, this);
 
-        // Adiciona uma torre para teste
-        new Tower(3,3,'tower', 50, 4, 1500, 1000, true, 50, 'bullet');
+        // Torre Tipo 2
+        tower2Static = game.add.sprite(160, 512, 'tower2');
+        tower2 = game.add.sprite(160, 512, 'tower2');
+        tower2.inputEnabled = true;
+        tower2.input.enableDrag();
+        tower2.input.enableSnap(32, 32, true, true);
+        tower2.events.onDragStop.add(this.onDragStop, this);
+
+        // Torre Tipo 3
+        tower3Static = game.add.sprite(224, 512, 'tower3');
+        tower3 = game.add.sprite(224, 512, 'tower3');
+        tower3.inputEnabled = true;
+        tower3.input.enableDrag();
+        tower3.input.enableSnap(32, 32, true, true);
+        tower3.events.onDragStop.add(this.onDragStop, this);
+
     },
 
     update: function() {
@@ -111,6 +132,22 @@ var play_state = {
 
         // Verifica colisao da bala com monstro
         this.game.physics.arcade.overlap(bullets, monsters, this.collisionChecker, null, this);
+    },
+
+    onDragStop: function(sprite, pointer) {
+        if (sprite.key == 'tower') {
+            new Tower(pointer.x,pointer.y,'tower', 50, 4, 1500, 1000, true, 50, 'bullet');
+            tower1.x = 96;
+            tower1.y = 512;
+        } else if (sprite.key == 'tower2') {
+            new Tower(pointer.x,pointer.y,'tower2', 50, 4, 1500, 1000, true, 50, 'bullet');
+            tower2.x = 160;
+            tower2.y = 512;
+        } else if (sprite.key == 'tower3') {
+            new Tower(pointer.x,pointer.y,'tower3', 50, 4, 1500, 1000, true, 50, 'bullet');
+            tower3.x = 224;
+            tower3.y = 512;
+        }
     },
 
     restartGame: function() {
