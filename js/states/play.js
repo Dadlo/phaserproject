@@ -128,7 +128,6 @@ var play_state = {
 
     collisionChecker: function(bullet, monster) {
         // destroi a bala
-        bullets.remove(bullet);
         bullet.kill();
         // tira o dano do monstro
         monster.health -= bullet.damage;
