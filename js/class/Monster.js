@@ -71,7 +71,9 @@ Monster.prototype.move = function(monster) {
 
     monster.lifeBarStatus.x = monster.x-monster.width;
     monster.lifeBarStatus.y = monster.y-monster.height/2;
-    monster.lifeBarStatus.width = monster.lifeBarStatus.width * monster.totalHealth / monster.health;
+    damTaken = monster.lifeBarStatus.width * (monster.health/monster.totalHealth);
+    console.log(damTaken);
+    monster.lifeBarStatus.width = monster.lifeBarStatus.width - damTaken;
 
 }
 
@@ -112,8 +114,8 @@ Monster.prototype.damageTaken = function(monster) {
 Monster.prototype.death = function(monster) {
     if (monster.health <= 0) {
         // destroi a sprite de monstro
-        monster.destroy();
         monsters.remove(monster);
+        monster.destroy();
         // remove a barra de vida do monstro
         monster.lifeBarStatus.destroy();
         monster.lifeBar.destroy();
