@@ -55,12 +55,21 @@ var play_state = {
         shape.drawRect(0, (this.game.height/5)*4, this.game.width, this.game.height/5); // x, y, largura, altura
         shape.endFill();
 
+
+        // Adiciona uma torre para teste
+        new Tower(3,3,'tower', 50, 4, 1500, 1000, true);
     },
 
     update: function() {
+        // Faz cada monstro andar
         monsters.forEach(function(monster) {
             Monster.prototype.move(monster);
         });  
+
+        // Faz cada torre verificar o range
+        towers.forEach(function(tower) {
+            Tower.prototype.attack(tower);
+        });
     },
 
     restartGame: function() {

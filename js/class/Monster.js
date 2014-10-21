@@ -5,6 +5,8 @@ var Monster = function(xTile, yTile, sprite, spriteLength, speed, damage, health
     // Adiciona sprite na posicao
     this.monster = game.add.sprite(xTile * tileSize, yTile * tileSize, sprite);
     this.monster.scale.set(1);
+    this.monster.xTile = xTile;
+    this.monster.yTile = yTile;
     // Adiciona animacao de andar em relacao ao sprite adicionado
     this.monster.animations.add('run');
     this.monster.animations.play('run', spriteLength*4, true);
