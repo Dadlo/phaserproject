@@ -4,6 +4,11 @@ var play_state = {
         // Declaracao de variaveis
         tileSize = 32; // tamanho do tile para validacao de posicao
 
+        // Zera onde - level e pontuacao
+        waveCurrent = 0;
+        levelCurrent = 0;
+        score = 0;
+
         // Inicia a fisica do jogo
         this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
@@ -57,15 +62,11 @@ var play_state = {
     },
 
     newWave: function() {
-        var i = 0;
-        var monstersBlock = setInterval(function() {
-            if (i < 5) {
-                new Monster(1, 0, 'person', 1, 1, 1);
-                i++;
-            } else {
-                clearTimeout(monstersBlock);
-            }
-        }, 1000);
+        // cria uma nova onda
+        // formato de envio dos monstros da onda: [{sprite:'person', amount:3},{sprite:'person', amount:3}]
+        // Pode intercalar e repetir monstros e sequencias
+        // Ele deixa um espaço vazio entre cada item da onda
+        new Wave([{sprite:'person', amount:3},{sprite:'person', amount:2}], 5000, 1000, 250);
     },
 
 };
