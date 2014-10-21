@@ -2,8 +2,7 @@ var play_state = {
 
     // TODO PRINCIPAL
     // - criar base a ser defendida com vida - hj inexistente
-    // - verificar colisao das balas com os monstros - hj inexistente
-    // - criar criterio de morte para os monstros - hj inexistente - ja existe vida e valor de dano
+    // - acertar bug de morte dos monstros - provavelmente da destruicao dos objetos sendo lidos nos grupos
     // - criar mecanismo de adicionar torres - ja existe classe de torre - apenas funcionalidade de clique
     // - criar lista de monstros com sprite, forca, vida etc - hj hard coded
     // - criar lista de niveis com detalhes das ondas - hj unico
