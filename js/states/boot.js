@@ -1,19 +1,16 @@
 'use strict';
 var boot_state = {
 
-    preload: function() {
+  preload: function () {
 
-        this.load.image('preloader', '../../assets/sprites/loading.gif');
+    this.load.image('preloader', '../../assets/sprites/loading.gif');
 
-    },
+  },
 
-    loading: function() {
-        // Caso queira exibir algum texto
-    },
+  create: function () {
 
-    create: function() {
-        this.game.state.start('preload')
+    this.game.state.start('preload');
 
-    },
+  },
 
 };

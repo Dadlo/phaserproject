@@ -25,9 +25,9 @@ var Wave = function(monsterSprite, timeToStart, timeBetween, points) {
 }
 
 Wave.prototype.count = function(wave) {
-    // TODO - fazer o timeToStart como tempo até iniciar a onda
-    // wave.timeToStart;
-    Wave.prototype.begin(wave);
+    var waitWave = setTimeout(function() {
+        Wave.prototype.begin(wave);
+    }, wave.timeToStart);
 }
 
 Wave.prototype.checkEnd = function(wave) {
