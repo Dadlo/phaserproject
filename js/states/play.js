@@ -104,6 +104,11 @@ var play_state = {
         var style = { font: "14px Arial", fill: "#000000", align: "left" };
         statusText = game.add.text(10, 10, text, style);
 
+        // Cria textos de Level e Onda
+        var textLevel = "Level: "+levelCurrent+ " \nWave: " + waveCurrent;
+        var styleLevel = { font: "14px Arial", fill: "#000000", align: "left" };
+        levelTextLevel = game.add.text(200, 10, textLevel, styleLevel);
+
         // Desenha os botes de adicionar torre
         // Torre Tipo 1
         tower1Static = game.add.sprite(96, 512, 'tower');
@@ -226,6 +231,12 @@ var play_state = {
         // Pode intercalar e repetir monstros e sequencias
         // Ele deixa um espaço vazio entre cada item da onda
         new Wave([{sprite:'person', amount:3},{sprite:'person', amount:2}], 5000, 1000, 250);
+        waveCurrent++;
+        if (waveCurrent > 3) {
+            waveCurrent = 1;
+            levelCurrent++;
+        }
+        levelTextLevel.setText("Level: "+levelCurrent+ " \nWave: " + waveCurrent);
     },
 
     collisionChecker: function(bullet, monster) {
