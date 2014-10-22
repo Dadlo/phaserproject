@@ -21,6 +21,7 @@ var load_state = {
         this.game.load.image('tower', '../../assets/sprites/tower.png');
         this.game.load.image('tower2', '../../assets/sprites/tower.png');
         this.game.load.image('tower3', '../../assets/sprites/tower.png');
+        this.game.load.image('village', '../../assets/sprites/tower.png');
         this.game.load.spritesheet('start', '../../assets/sprites/startsprite.png',481,193,2);
         this.game.load.spritesheet('person', '../../assets/sprites/person.png',32,32,4);
 

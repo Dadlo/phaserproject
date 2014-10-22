@@ -20,6 +20,7 @@ var play_state = {
     // - criar textos de pontuacao atual - hj inexistente
     // - criar textos de onda atual - hj inexistente
     // - criar texto de level atual - com do mapa - hj inexistente
+    // - melhorar AI da torre
 
     // - Caso tudo seja atingido verificar de utilizar pathfinding a star ao inves de mapear o caminho manualmente
 
@@ -49,7 +50,14 @@ var play_state = {
         {x:3, y:6}, {x:4, y:6}, {x:5, y:6}, {x:6, y:6}, {x:7, y:6}, {x:8, y:6}, {x:9, y:6}, {x:10, y:6},
         {x:10, y:7}, {x:11, y:7}, {x:12, y:7}, {x:13, y:7}, {x:13, y:8}, {x:14, y:8}, {x:15, y:8}, {x:16, y:8},
         {x:16, y:9}, {x:16, y:10}, {x:17, y:10}, {x:18, y:10}, {x:19, y:10}, {x:20, y:10}, {x:20, y:11}, {x:21, y:11},
-        {x:22, y:11}, {x:23, y:11}, {x:24, y:11}, {x:25, y:11}, {x:26, y:11}, {x:27, y:11}, {x:28, y:11}, {x:29, y:11}];
+        {x:22, y:11}, {x:23, y:11}, {x:24, y:11}, {x:25, y:11}];
+
+        // Cria grupo para Vila para facilicar a colisao com mudanca de vila entre os niveos
+        villages = this.game.add.group();
+        villages.enableBody = true;
+        this.game.physics.enable(villages, Phaser.Physics.ARCADE);
+        // Cria a Vila a ser defendida
+        village01 = new Village('village', 100);
 
         // Cria grupo de monstros
         monsters = this.game.add.group();
@@ -146,6 +154,11 @@ var play_state = {
 
         // Verifica colisao da bala com monstro
         this.game.physics.arcade.overlap(bullets, monsters, this.collisionChecker, null, this);
+
+        // Verifica colisao de inimigo com vila
+        this.game.physics.arcade.overlap(villages, monsters, Village.prototype.damageTaken, null, this);
+
+        // Atualiza textos de status
         this.updateTexts();
     },
 

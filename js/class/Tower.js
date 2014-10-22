@@ -35,7 +35,7 @@ Tower.prototype.attack = function(tower) {
                 targets.push(monster); // lista todos os alvos no range
             }
         }); 
-        // TODO - AI da Torre para escolher qual alvo atirar
+        // TODO - AI da Torre para escolher qual alvo atirar - hoje atiro no primeiro dentro de range
         if (targets.length>0){
             Tower.prototype.fire(tower,targets[0]);
         }
