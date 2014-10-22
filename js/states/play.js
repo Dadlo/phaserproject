@@ -92,6 +92,11 @@ var play_state = {
         shape.drawRect(0, (this.game.height/5)*4, this.game.width, this.game.height/5); // x, y, largura, altura
         shape.endFill();
 
+        // Cria textos de pontuacao dinheiro e onda
+        var text = "Money: "+money+ " \nScore: " + score;
+        var style = { font: "14px Arial", fill: "#000000", align: "left" };
+        statusText = game.add.text(10, 10, text, style);
+
         // Desenha os botes de adicionar torre
         // Torre Tipo 1
         tower1Static = game.add.sprite(96, 512, 'tower');
@@ -100,6 +105,10 @@ var play_state = {
         tower1.input.enableDrag();
         tower1.input.enableSnap(32, 32, true, true);
         tower1.events.onDragStop.add(this.onDragStop, this);
+        // texto da torre
+        text = "Tower 1 \n $100 \n Constant ";
+        var style = { font: "11px Arial", fill: "#FFFFFF", align: "center" };
+        torre1Text = game.add.text(88, 546, text, style);
 
         // Torre Tipo 2
         tower2Static = game.add.sprite(160, 512, 'tower2');
@@ -108,6 +117,9 @@ var play_state = {
         tower2.input.enableDrag();
         tower2.input.enableSnap(32, 32, true, true);
         tower2.events.onDragStop.add(this.onDragStop, this);
+        // texto da torre
+        text = "Tower 2 \n $300 \n Power";
+        torre2Text = game.add.text(152, 546, text, style);
 
         // Torre Tipo 3
         tower3Static = game.add.sprite(224, 512, 'tower3');
@@ -116,11 +128,8 @@ var play_state = {
         tower3.input.enableDrag();
         tower3.input.enableSnap(32, 32, true, true);
         tower3.events.onDragStop.add(this.onDragStop, this);
-
-        // Cria textos de pontuacao dinheiro e onda
-        var text = "Money: "+money+ " \nScore: " + score;
-        var style = { font: "14px Arial", fill: "#000000", align: "left" };
-        statusText = game.add.text(10, 10, text, style);
+        text = "Tower 3 \n $150 \n Rapid Fire ";
+        torre3Text = game.add.text(216, 546, text, style);
 
     },
 
@@ -172,7 +181,7 @@ var play_state = {
             tower2.y = 512;
         } else if (sprite.key == 'tower3') {
             sprite = 'tower3';
-            damage =  25;
+            damage =  15;
             range =  5;
             fireRate =  500;
             health =  1000;
