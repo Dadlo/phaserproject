@@ -2,7 +2,6 @@ var play_state = {
 
     // TODO PRINCIPAL
     // - criar base a ser defendida com vida - hj inexistente
-    // - criar mecanismo de adicionar torres - ja existe classe de torre - apenas funcionalidade de clique
     // - criar lista de monstros com sprite, forca, vida etc - hj hard coded
     // - criar lista de niveis com detalhes das ondas - hj unico
     // - criar mecanismo de evolucao dentro dos niveis - hj unico
