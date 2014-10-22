@@ -1,19 +1,18 @@
 var play_state = {
 
     // TODO PRINCIPAL
-    // - criar sistema de monetizacao - onde monstro morto da dinheiro e torre criada custa dinheiro
     // - criar base a ser defendida com vida - hj inexistente
     // - criar lista de monstros com sprite, forca, vida etc - hj hard coded
     // - criar lista de niveis com detalhes das ondas - hj unico
     // - criar mecanismo de evolucao dentro dos niveis - hj unico
     // - levar para classe propria a leitura do tileMap para simplificar o uso de varios mapas - hj unico
     // - condicao de vitoria da onda - hj inexistente
-    // - condicao de vitoria do jogo - hj inexistente
     // - condicao de derrota do jogo - hj inexistente
     // - splash screen - hj inexistente
     // - tela de derrota - hj inexistente
     // - reset do jogo completo com limpesa dos sprites e variaveis - hj inutil
     // - ajustar o preloader - hj com gif circular e nao barra
+    // - criar validacao de posicionamento de novas torres - checar se nao e caminho e se ja nao existe uma torre la -- lista com esses pontos
     // - criar dentro do estado de play os estados de inclusao de torre e de ondas - trabalhar com o tempo de onda - hj inexistente
     // - criar sistema de upgrade para torres // acredito que remover a torre atual e aplicar uma nova com as novas prorpiedades seja o melhor - hj inexistente
     // - criar sistema de caixa de selecao para o upgrade das torres - hj inexistente
@@ -33,6 +32,8 @@ var play_state = {
         waveCurrent = 0;
         levelCurrent = 0;
         score = 0;
+        // define dinheiro inicial do jogador
+        money = 1000;
 
         // Inicia a fisica do jogo
         this.game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -116,6 +117,11 @@ var play_state = {
         tower3.input.enableSnap(32, 32, true, true);
         tower3.events.onDragStop.add(this.onDragStop, this);
 
+        // Cria textos de pontuacao dinheiro e onda
+        var text = "Money: "+money+ " \nScore: " + score;
+        var style = { font: "14px Arial", fill: "#000000", align: "left" };
+        statusText = game.add.text(10, 10, text, style);
+
     },
 
     update: function() {
@@ -131,22 +137,61 @@ var play_state = {
 
         // Verifica colisao da bala com monstro
         this.game.physics.arcade.overlap(bullets, monsters, this.collisionChecker, null, this);
+        this.updateTexts();
     },
 
     onDragStop: function(sprite, pointer) {
+        // TODO - checar se pode adicionar o sprite na posicao
+        var x = pointer.x;
+        var y = pointer.y;
+        var sprite, damage, range, fireRate, health, imortal, bulletSpeed, price, bulletSprite;
         if (sprite.key == 'tower') {
-            new Tower(pointer.x,pointer.y,'tower', 50, 4, 1500, 1000, true, 50, 'bullet');
+            sprite = 'tower';
+            damage =  50;
+            range =  4;
+            fireRate =  1500;
+            health =  1000;
+            imortal =  true;
+            bulletSpeed =  50;
+            price =  100;
+            bulletSprite =  'bullet';
+
             tower1.x = 96;
             tower1.y = 512;
         } else if (sprite.key == 'tower2') {
-            new Tower(pointer.x,pointer.y,'tower2', 50, 4, 1500, 1000, true, 50, 'bullet');
+            sprite = 'tower2';
+            damage =  300;
+            range =  2;
+            fireRate =  2500;
+            health =  1000;
+            imortal =  true;
+            bulletSpeed =  40;
+            price =  300;
+            bulletSprite =  'bullet';
             tower2.x = 160;
             tower2.y = 512;
         } else if (sprite.key == 'tower3') {
-            new Tower(pointer.x,pointer.y,'tower3', 50, 4, 1500, 1000, true, 50, 'bullet');
+            sprite = 'tower3';
+            damage =  25;
+            range =  5;
+            fireRate =  500;
+            health =  1000;
+            imortal =  true;
+            bulletSpeed =  75;
+            price =  150;
+            bulletSprite =  'bullet';
             tower3.x = 224;
             tower3.y = 512;
         }
+        if (money >= price) {
+            new Tower(x, y, sprite, damage, range, fireRate, health, imortal, bulletSpeed, price, bulletSprite);
+        } else {
+            // TODO - mensagem de sem dinheiro
+        }
+    },
+
+    updateTexts: function() {
+        statusText.setText("Money: "+money+ " \nScore: " + score);
     },
 
     restartGame: function() {

@@ -1,4 +1,4 @@
-var Tower = function(xTile, yTile, sprite, damage, range, fireRate, health, imortal, bulletSpeed, bulletSprite) {
+var Tower = function(xTile, yTile, sprite, damage, range, fireRate, health, imortal, bulletSpeed, price, bulletSprite) {
     // Adiciona a sprite da torre
     this.tower = game.add.sprite(xTile- (xTile % tileSize), yTile - (yTile % tileSize), sprite);
     // Salva tile em que está
@@ -22,7 +22,8 @@ var Tower = function(xTile, yTile, sprite, damage, range, fireRate, health, imor
     // Se a torre pode ser atingida
     this.tower.imortal = imortal;
     this.tower.upgrade = 0;
-
+    // Substrai o valor da torre
+    money -= price;
 }
 
 Tower.prototype.attack = function(tower) {

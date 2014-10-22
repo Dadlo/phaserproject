@@ -5,7 +5,7 @@ var credit_state = {
         var text = "Lorem ipsum dolor sit amet - Programmer \n Lorem ipsum dolor sit amet - Disner \n Lorem ipsum dolor sit amet - Programmer \n Lorem ipsum dolor sit amet - Sound Artist \n Lorem ipsum dolor sit amet - Programmer \n Lorem ipsum dolor sit amet - Disner \n Lorem ipsum dolor sit amet - Programmer \n Lorem ipsum dolor sit amet - Sound Artist \n Lorem ipsum dolor sit amet - Programmer \n Lorem ipsum dolor sit amet - Disner \n Lorem ipsum dolor sit amet - Programmer \n Lorem ipsum dolor sit amet - Sound Artist";
         var style = { font: "18px Arial", fill: "#ff0044", align: "center" };
 
-        var t = game.add.text(game.world.centerX-300, 100, text, style);
+        var creditText = game.add.text(game.world.centerX-200, 100, text, style);
     },
 
     // Vai para o estado de 'menu'

@@ -122,5 +122,6 @@ Monster.prototype.death = function(monster) {
         monster.lifeBarStatus.destroy();
         monster.lifeBar.destroy();
     }
-    score += 1;
+    score += 5;
+    money += 25;
 }
