@@ -108,7 +108,7 @@ var play_state = {
     // Desenha os botes de adicionar torre
     // Torre Tipo 1
     this.game.add.sprite(96, 512, 'tower');
-    var tower1 = this.game.add.sprite(96, 512, 'tower');
+    tower1 = this.game.add.sprite(96, 512, 'tower');
     tower1.inputEnabled = true;
     tower1.input.enableDrag();
     tower1.input.enableSnap(32, 32, true, true);
@@ -120,7 +120,7 @@ var play_state = {
 
     // Torre Tipo 2
     this.game.add.sprite(160, 512, 'tower2');
-    var tower2 = this.game.add.sprite(160, 512, 'tower2');
+    tower2 = this.game.add.sprite(160, 512, 'tower2');
     tower2.inputEnabled = true;
     tower2.input.enableDrag();
     tower2.input.enableSnap(32, 32, true, true);
@@ -131,7 +131,7 @@ var play_state = {
 
     // Torre Tipo 3
     this.game.add.sprite(224, 512, 'tower3');
-    var tower3 = this.game.add.sprite(224, 512, 'tower3');
+    tower3 = this.game.add.sprite(224, 512, 'tower3');
     tower3.inputEnabled = true;
     tower3.input.enableDrag();
     tower3.input.enableSnap(32, 32, true, true);
