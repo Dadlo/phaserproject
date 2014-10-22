@@ -1,6 +1,7 @@
 var play_state = {
 
     // TODO PRINCIPAL
+    // - criar sistema de monetizacao - onde monstro morto da dinheiro e torre criada custa dinheiro
     // - criar base a ser defendida com vida - hj inexistente
     // - criar lista de monstros com sprite, forca, vida etc - hj hard coded
     // - criar lista de niveis com detalhes das ondas - hj unico
@@ -11,7 +12,6 @@ var play_state = {
     // - condicao de derrota do jogo - hj inexistente
     // - splash screen - hj inexistente
     // - tela de derrota - hj inexistente
-    // - tela de credito - hj inexistente
     // - reset do jogo completo com limpesa dos sprites e variaveis - hj inutil
     // - ajustar o preloader - hj com gif circular e nao barra
     // - criar dentro do estado de play os estados de inclusao de torre e de ondas - trabalhar com o tempo de onda - hj inexistente
