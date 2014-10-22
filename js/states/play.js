@@ -1,28 +1,27 @@
 var play_state = {
 
     // TODO PRINCIPAL
-    // - criar base a ser defendida com vida - hj inexistente
     // - criar lista de monstros com sprite, forca, vida etc - hj hard coded
     // - criar lista de niveis com detalhes das ondas - hj unico
     // - criar mecanismo de evolucao dentro dos niveis - hj unico
     // - levar para classe propria a leitura do tileMap para simplificar o uso de varios mapas - hj unico
     // - condicao de vitoria da onda - hj inexistente
-    // - condicao de derrota do jogo - hj inexistente
     // - splash screen - hj inexistente
+    // - condicao de derrota do jogo - hj verifica a vila sendo destruida - mas nao pausa o jogo
     // - tela de derrota - hj inexistente
-    // - reset do jogo completo com limpesa dos sprites e variaveis - hj inutil
+    // - reset do jogo completo com limpeza dos sprites e variaveis - hj inutil
     // - ajustar o preloader - hj com gif circular e nao barra
     // - criar validacao de posicionamento de novas torres - checar se nao e caminho e se ja nao existe uma torre la -- lista com esses pontos
     // - criar dentro do estado de play os estados de inclusao de torre e de ondas - trabalhar com o tempo de onda - hj inexistente
     // - criar sistema de upgrade para torres // acredito que remover a torre atual e aplicar uma nova com as novas prorpiedades seja o melhor - hj inexistente
     // - criar sistema de caixa de selecao para o upgrade das torres - hj inexistente
     // - criar textos de contador de tempo para proxima onda - hj inexistente
-    // - criar textos de pontuacao atual - hj inexistente
     // - criar textos de onda atual - hj inexistente
     // - criar texto de level atual - com do mapa - hj inexistente
     // - melhorar AI da torre
 
     // - Caso tudo seja atingido verificar de utilizar pathfinding a star ao inves de mapear o caminho manualmente
+    // - Caso pathfinding seja atingido - inserir barreiras destrutiveis no jogo
 
 
     create: function() { 
