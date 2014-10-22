@@ -16,10 +16,7 @@ var play_state = {
     // - criar sistema de upgrade para torres // acredito que remover a torre atual e aplicar uma nova com as novas prorpiedades seja o melhor - hj inexistente
     // - criar sistema de caixa de selecao para o upgrade das torres - hj inexistente
     // - criar textos de contador de tempo para proxima onda - hj inexistente
-    // - criar textos de onda atual - hj inexistente
-    // - criar texto de level atual - com do mapa - hj inexistente
     // - melhorar AI da torre
-
     // - Caso tudo seja atingido verificar de utilizar pathfinding a star ao inves de mapear o caminho manualmente
     // - Caso pathfinding seja atingido - inserir barreiras destrutiveis no jogo
 
@@ -140,6 +137,7 @@ var play_state = {
         tower3.input.enableDrag();
         tower3.input.enableSnap(32, 32, true, true);
         tower3.events.onDragStop.add(this.onDragStop, this);
+        // texto da torre
         text = "Tower 3 \n $150 \n Rapid Fire ";
         torre3Text = game.add.text(216, 546, text, style);
 
