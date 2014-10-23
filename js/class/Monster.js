@@ -38,10 +38,10 @@ var Monster = function (xTile, yTile, sprite, spriteLength, speed, damage, healt
   this.monster.lifeBarStatus.beginFill(0x00FF00, 0.9); // cor, alfa
   this.monster.lifeBarStatus.drawRect(this.monster.x - this.monster.width / 2, this.monster.y - this.monster.height / 2, this.monster.width, 5); // x, y, largura, altura
 
-
   // Inicia movimentacao
   Monster.prototype.nextMove(this.monster);
   Monster.prototype.move(this.monster);
+
 }
 
 Monster.prototype.move = function (monster) {
@@ -79,10 +79,6 @@ Monster.prototype.move = function (monster) {
 
 }
 
-Monster.prototype.attack = function (monster) {
-  // TODO
-}
-
 Monster.prototype.nextMove = function (monster) {
   if (monster.tile < tilePath.length - 1) {
     monster.tile++;
@@ -109,10 +105,6 @@ Monster.prototype.nextMove = function (monster) {
   }
 }
 
-Monster.prototype.damageTaken = function (monster) {
-  // TODO
-}
-
 Monster.prototype.death = function (monster) {
   if (monster.health <= 0) {
     // destroi a sprite de monstro
@@ -121,6 +113,7 @@ Monster.prototype.death = function (monster) {
     // remove a barra de vida do monstro
     monster.lifeBarStatus.destroy();
     monster.lifeBar.destroy();
+    waveMonsters--;
   }
   score += 5;
   money += 25;

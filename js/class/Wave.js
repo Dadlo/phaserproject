@@ -11,36 +11,29 @@ var Wave = function (monsterSprite, timeToStart, timeBetween, points) {
   this.wave.timeBetween = timeBetween;
   // define os pontos que receberá caso ganhe a onda
   this.wave.points = points;
-  // define numero de monstros destruidos
-  this.wave.deaths = 0;
   // Verifica a quantidade total de monstros
   var i = 0;
   this.wave.waveLenght = 0;
-  if (i <= this.wave.monstersType) {
+  while (i <= this.wave.monstersType-1) {
     this.wave.waveLenght += this.wave.monsterSprite[i].amount;
     i++;
   }
+  // Define a quantidade total de monstros de forma global
+  waveMonsters = this.wave.waveLenght;
   // inicia a onda
   Wave.prototype.count(this.wave);
 }
 
 Wave.prototype.count = function (wave) {
-  var waitWave = setTimeout(function () {
+  waitWave = setTimeout(function () {
     Wave.prototype.begin(wave);
   }, wave.timeToStart);
-}
-
-Wave.prototype.checkEnd = function (wave) {
-  // TODO
-  if (wave.deaths >= wave.waveLenght) {
-    Wave.prototype.end(wave);
-  }
 }
 
 Wave.prototype.begin = function (wave) {
   var i = 0;
   var j = 0;
-  var monstersBlock = setInterval(function () {
+  monstersBlock = setInterval(function () {
     // Para cada tipo de monstro
     if (j < wave.monstersType) {
       // Para cada um dentro da quantidade definida em amount
@@ -57,10 +50,4 @@ Wave.prototype.begin = function (wave) {
       clearTimeout(monstersBlock);
     }
   }, wave.timeBetween);
-}
-
-Wave.prototype.end = function () {
-  // TODO
-  score += points;
-  waveCurrent++;
 }

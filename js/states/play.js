@@ -2,20 +2,21 @@ var play_state = {
   // TODO PRINCIPAL
   // - criar lista de monstros com sprite, forca, vida etc - hj hard coded
   // - criar lista de niveis com detalhes das ondas - hj unico
-  // - criar mecanismo de evolucao dentro dos niveis - hj unico
   // - levar para classe propria a leitura do tileMap para simplificar o uso de varios mapas - hj unico
-  // - condicao de vitoria da onda - hj inexistente
+  // - condicao de vitoria do jogo // hj infinito
   // - splash screen - hj inexistente
-  // - condicao de derrota do jogo - hj verifica a vila sendo destruida - mas nao pausa o jogo
   // - tela de derrota - hj inexistente
-  // - reset do jogo completo com limpeza dos sprites e variaveis - hj inutil
+  // - reset do jogo completo com limpeza dos sprites e variaveis - hj limpa tela e volta para menu
   // - ajustar o preloader - hj com gif circular e nao barra
   // - criar validacao de posicionamento de novas torres - checar se nao e caminho e se ja nao existe uma torre la -- lista com esses pontos
   // - criar dentro do estado de play os estados de inclusao de torre e de ondas - trabalhar com o tempo de onda - hj inexistente
   // - criar sistema de upgrade para torres // acredito que remover a torre atual e aplicar uma nova com as novas prorpiedades seja o melhor - hj inexistente
   // - criar sistema de caixa de selecao para o upgrade das torres - hj inexistente
   // - criar textos de contador de tempo para proxima onda - hj inexistente
-  // - melhorar AI da torre
+  // - melhorar AI da torre - hj ataca o primeiro no range
+  // - ajuste de escopo - remocao de variaveis globais desnecessarias
+  // - ajuste de performance - destruir objetos ao inves de os limpar da tela
+  // - Polimento do jogo e ajuste de classes para facilitar manutencao
   // - Caso tudo seja atingido verificar de utilizar pathfinding a star ao inves de mapear o caminho manualmente
   // - Caso pathfinding seja atingido - inserir barreiras destrutiveis no jogo
 
@@ -23,10 +24,10 @@ var play_state = {
   create: function () {
     // Declaracao de variaveis
     tileSize = 32; // tamanho do tile para validacao de posicao
-
     // Zera onde - level e pontuacao
     waveCurrent = 0;
     levelCurrent = 0;
+    waveMonsters = 0;
     score = 0;
     // define dinheiro inicial do jogador
     money = 1000;
@@ -143,6 +144,9 @@ var play_state = {
   },
 
   update: function () {
+    // Verifica se ha monstros para iniciar proxima onda
+    this.checkWaveEnd();
+
     // Faz cada monstro andar
     monsters.forEach(function (monster) {
       Monster.prototype.move(monster);
@@ -217,9 +221,19 @@ var play_state = {
     statusText.setText("Money: " + money + " \nScore: " + score);
   },
 
+  checkWaveEnd: function () {
+    // TODO - verificar se todos os monstros ja morreram e iniciar proxima onda
+    if (waveMonsters == 0) {
+      this.newWave();
+    }
+  },
+
   restartGame: function () {
     // Voltar para o estado 'menu'
+    this.game.world.removeAll();
     this.game.state.start('menu');
+
+    // TODO limpar as variaveis e resetar os timers quando rodando
   },
 
   newWave: function () {
@@ -227,8 +241,8 @@ var play_state = {
     // formato de envio dos monstros da onda: [{sprite:'person', amount:3},{sprite:'person', amount:3}]
     // Pode intercalar e repetir monstros e sequencias
     // Ele deixa um espaço vazio entre cada item da onda
-    new Wave([{sprite: 'person', amount: 3}, {sprite: 'person', amount: 2}], 5000, 1000, 250);
     waveCurrent++;
+    new Wave([{sprite: 'person', amount: 3}, {sprite: 'person', amount: 2}], 5000, 1000, 250);
     if (waveCurrent > 3) {
       waveCurrent = 1;
       levelCurrent++;

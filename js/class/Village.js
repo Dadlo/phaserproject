@@ -43,11 +43,23 @@ Village.prototype.damageTaken = function (village, monster) {
 }
 
 Village.prototype.death = function (village) {
-  // TODO - condicao de derrota
   if (village.health <= 0) {
     village.lifeBar.destroy();
     village.lifeBarStatus.destroy();
     village.kill();
+    // limpa a tela
+    game.world.removeAll();
+    clearTimeout(monstersBlock);
+    clearTimeout(waitWave);
+
+    // Cria textos de perda
+    var styleDeath = { font: "28px Arial", fill: "#FF0000", align: "center" };
+    deathText = game.add.text(200, 250, "Your Village was Destroyed", styleDeath);
+
+    // espera 5 segundos e joga para o menu
+    waitReload = setTimeout(function () {
+      this.game.state.start('menu');
+    }, 5000);
+
   }
-  //this.game.state.start('death_state');
 }
