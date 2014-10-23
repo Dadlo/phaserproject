@@ -1,3 +1,4 @@
+/*globals game, tileSize, towers, money:true, monsters, tilePath, Bullet  */
 var Tower = function (xTile, yTile, sprite, damage, range, fireRate, health, imortal, bulletSpeed, price, bulletSprite) {
   // Adiciona a sprite da torre
   this.tower = game.add.sprite(xTile - (xTile % tileSize), yTile - (yTile % tileSize), sprite);
@@ -24,37 +25,38 @@ var Tower = function (xTile, yTile, sprite, damage, range, fireRate, health, imo
   this.tower.upgrade = 0;
   // Substrai o valor da torre
   money -= price;
-}
+};
 
 Tower.prototype.attack = function (tower) {
   if (game.time.now > tower.lastShot) {
     // TODO - Atirar
-    targets = [];
+    var targets = [];
     monsters.forEach(function (monster) {
-      if (Math.abs(tilePath[monster.tile].y - tower.yTile) < tower.range && Math.abs(tilePath[monster.tile].x - tower.xTile) < tower.range ) {
+      if (Math.abs(tilePath[monster.tile].y - tower.yTile) < tower.range && Math.abs(tilePath[monster.tile].x - tower.xTile) < tower.range) {
         targets.push(monster); // lista todos os alvos no range
       }
-    }); 
+    });
     // TODO - AI da Torre para escolher qual alvo atirar - hoje atiro no primeiro dentro de range
-    if (targets.length > 0){
-      Tower.prototype.fire(tower,targets[0]);
+    if (targets.length > 0) {
+      Tower.prototype.fire(tower, targets[0]);
     }
     tower.lastShot = game.time.now + tower.fireRate;
   }
-}
+};
 
 Tower.prototype.fire = function (tower, monster) {
   //Bullet = function (startX, startY, destX, destY, speed, damage, shooter, sprite)
   new Bullet(tower.x, tower.y, monster.x, monster.y, tower.bulletSpeed, tower.damage, tower, tower.bulletSprite);
-}
+};
 
 Tower.prototype.damageTaken = function (tower, monster) {
-  tower.health - monster.damage;
-  if (tower.health <= 0 && tower.imortal == false) {
+  tower.health -= monster.damage;
+  if (tower.health <= 0 && tower.imortal === false) {
     Tower.prototype.death(this);
   }
-}
+};
 
 Tower.prototype.death = function (tower) {
   // TODO
-}
+  console.log('tower destroyed' + tower);
+};

@@ -1,3 +1,4 @@
+/*globals game, tileSize, monsters, tilePath, waveMonsters:true, score:true, money:true */
 var Monster = function (xTile, yTile, sprite, spriteLength, speed, damage, health) {
   // TODO - definir velocidade - dano e vida de acordo com a sprite enviada, ou trocar sprite
   // pelo nome do monstro e pegar os dados de uma lista global
@@ -42,7 +43,7 @@ var Monster = function (xTile, yTile, sprite, spriteLength, speed, damage, healt
   Monster.prototype.nextMove(this.monster);
   Monster.prototype.move(this.monster);
 
-}
+};
 
 Monster.prototype.move = function (monster) {
   // TODO
@@ -52,16 +53,13 @@ Monster.prototype.move = function (monster) {
   if (monster.speedX > 0 && monster.x >= monster.nextPosX) {
     monster.x = monster.nextPosX;
     Monster.prototype.nextMove(monster);
-  }
-  else if (monster.speedX < 0 && monster.x <= monster.nextPosX) {
+  } else if (monster.speedX < 0 && monster.x <= monster.nextPosX) {
     monster.x = monster.nextPosX;
     Monster.prototype.nextMove(monster);
-  }
-  else if (monster.speedY > 0 && monster.y >= monster.nextPosY) {
+  } else if (monster.speedY > 0 && monster.y >= monster.nextPosY) {
     monster.y = monster.nextPosY;
     Monster.prototype.nextMove(monster);
-  }
-  else if (monster.speedY < 0 && monster.y <= monster.nextPosY) {
+  } else if (monster.speedY < 0 && monster.y <= monster.nextPosY) {
     monster.y = monster.nextPosY;
     Monster.prototype.nextMove(monster);
   }
@@ -73,18 +71,18 @@ Monster.prototype.move = function (monster) {
   monster.lifeBarStatus.x = monster.x - monster.width;
   monster.lifeBarStatus.y = monster.y - monster.height / 2;
   // Calcula o dano tomado - escala e posiciona a barra de vida atual
-  damTaken = monster.health/monster.totalHealth;
+  var damTaken = monster.health / monster.totalHealth;
   monster.lifeBarStatus.scale.x = damTaken;
-  monster.lifeBarStatus.x += (1 - (monster.health/monster.totalHealth)) * monster.width / 2;
+  monster.lifeBarStatus.x += (1 - (monster.health / monster.totalHealth)) * monster.width / 2;
 
-}
+};
 
 Monster.prototype.nextMove = function (monster) {
   if (monster.tile < tilePath.length - 1) {
     monster.tile++;
   }
-  monster.nextPosX = parseInt(tilePath[monster.tile].x * tileSize);
-  monster.nextPosY = parseInt(tilePath[monster.tile].y * tileSize);
+  monster.nextPosX = parseInt(tilePath[monster.tile].x * tileSize, 10);
+  monster.nextPosY = parseInt(tilePath[monster.tile].y * tileSize, 10);
   if (monster.nextPosX > monster.x) {
     monster.speedX = monster.speed;
     monster.angle = 0;
@@ -103,7 +101,7 @@ Monster.prototype.nextMove = function (monster) {
   } else {
     monster.speedY = 0;
   }
-}
+};
 
 Monster.prototype.death = function (monster) {
   if (monster.health <= 0) {
@@ -117,4 +115,4 @@ Monster.prototype.death = function (monster) {
   }
   score += 5;
   money += 25;
-}
+};

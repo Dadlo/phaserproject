@@ -1,4 +1,3 @@
-'use strict';
 var boot_state = {
 
   preload: function () {

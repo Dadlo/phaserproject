@@ -1,3 +1,4 @@
+/*globals Phaser */
 var load_state = {
 
   preload: function () {

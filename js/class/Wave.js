@@ -1,3 +1,4 @@
+/*globals game, waveMonsters:true, Monster, monstersBlock:true */
 var Wave = function (monsterSprite, timeToStart, timeBetween, points) {
   // Recebe as variaveis
   // cria a wave como sprite para receber as propriedades - verificar como gerar objeto generico
@@ -14,7 +15,7 @@ var Wave = function (monsterSprite, timeToStart, timeBetween, points) {
   // Verifica a quantidade total de monstros
   var i = 0;
   this.wave.waveLenght = 0;
-  while (i <= this.wave.monstersType-1) {
+  while (i <= this.wave.monstersType - 1) {
     this.wave.waveLenght += this.wave.monsterSprite[i].amount;
     i++;
   }
@@ -22,13 +23,13 @@ var Wave = function (monsterSprite, timeToStart, timeBetween, points) {
   waveMonsters = this.wave.waveLenght;
   // inicia a onda
   Wave.prototype.count(this.wave);
-}
+};
 
 Wave.prototype.count = function (wave) {
-  waitWave = setTimeout(function () {
+  setTimeout(function () {
     Wave.prototype.begin(wave);
   }, wave.timeToStart);
-}
+};
 
 Wave.prototype.begin = function (wave) {
   var i = 0;
@@ -45,9 +46,8 @@ Wave.prototype.begin = function (wave) {
         j++;
         i = 0;
       }
-    }
-    else {
+    } else {
       clearTimeout(monstersBlock);
     }
   }, wave.timeBetween);
-}
+};

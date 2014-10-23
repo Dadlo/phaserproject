@@ -1,3 +1,4 @@
+/*globals  */
 var play_state = {
   // TODO PRINCIPAL
   // - criar lista de monstros com sprite, forca, vida etc - hj hard coded

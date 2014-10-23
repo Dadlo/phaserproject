@@ -1,3 +1,4 @@
+/*globals game */
 var credit_state = {
   create: function () {
     // Adiciona o botao de iniciar
