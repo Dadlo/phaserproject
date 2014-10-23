@@ -1,4 +1,32 @@
-/*globals  */
+/*globals  Phaser, Village, Monster, Tower, Wave */
+
+/* Global Variables */
+
+// Tamanho do tile
+var tileSize = 32;
+// Inicia onda - level - pontuacao - qtdade de monstros
+var waveCurrent = 0;
+var levelCurrent = 0;
+var waveMonsters = 0;
+var score = 0;
+// define dinheiro inicial do jogador
+var money = 1000;
+// Caminho a ser percorrido
+var tilePath;
+// Grupos
+var villages;
+var monsters;
+var towers;
+var bullets;
+// texto de status e nivel
+var statusText;
+var levelTextLevel;
+// torres
+var tower1;
+var tower2;
+var tower3;
+
+
 var play_state = {
   // TODO PRINCIPAL
   // - criar lista de monstros com sprite, forca, vida etc - hj hard coded
@@ -15,46 +43,31 @@ var play_state = {
   // - criar sistema de caixa de selecao para o upgrade das torres - hj inexistente
   // - criar textos de contador de tempo para proxima onda - hj inexistente
   // - melhorar AI da torre - hj ataca o primeiro no range
-  // - ajuste de escopo - remocao de variaveis globais desnecessarias
   // - ajuste de performance - destruir objetos ao inves de os limpar da tela
   // - Polimento do jogo e ajuste de classes para facilitar manutencao
   // - Caso tudo seja atingido verificar de utilizar pathfinding a star ao inves de mapear o caminho manualmente
   // - Caso pathfinding seja atingido - inserir barreiras destrutiveis no jogo
 
-
   create: function () {
-    // Declaracao de variaveis
-    tileSize = 32; // tamanho do tile para validacao de posicao
-    // Zera onde - level e pontuacao
-    waveCurrent = 0;
-    levelCurrent = 0;
-    waveMonsters = 0;
-    score = 0;
-    // define dinheiro inicial do jogador
-    money = 1000;
-
     // Inicia a fisica do jogo
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
-
     // Cria e aplica o tile map
-    map = this.game.add.tilemap('jsonmap');
+    var map = this.game.add.tilemap('jsonmap');
     map.addTilesetImage('Desert', 'tilesmap');
-    layer = map.createLayer('Ground');
+    var layer = map.createLayer('Ground');
     layer.resizeWorld();
-    //layer.debug = true;
-
+    // caminho a ser percorrido pelos monstros
     tilePath = [{x: 1, y: 1}, {x: 2, y: 1}, {x: 2, y: 2}, {x: 2, y: 3}, {x: 2, y: 4}, {x: 2, y: 5}, {x: 2, y: 6},
       {x: 3, y: 6}, {x: 4, y: 6}, {x: 5, y: 6}, {x: 6, y: 6}, {x: 7, y: 6}, {x: 8, y: 6}, {x: 9, y: 6}, {x: 10, y: 6},
       {x: 10, y: 7}, {x: 11, y: 7}, {x: 12, y: 7}, {x: 13, y: 7}, {x: 13, y: 8}, {x: 14, y: 8}, {x: 15, y: 8}, {x: 16, y: 8},
       {x: 16, y: 9}, {x: 16, y: 10}, {x: 17, y: 10}, {x: 18, y: 10}, {x: 19, y: 10}, {x: 20, y: 10}, {x: 20, y: 11}, {x: 21, y: 11},
       {x: 22, y: 11}, {x: 23, y: 11}, {x: 24, y: 11}, {x: 25, y: 11}];
-
     // Cria grupo para Vila para facilicar a colisao com mudanca de vila entre os niveos
     villages = this.game.add.group();
     villages.enableBody = true;
     this.game.physics.enable(villages, Phaser.Physics.ARCADE);
     // Cria a Vila a ser defendida
-    village01 = new Village('village', 100);
+    new Village('village', 100);
 
     // Cria grupo de monstros
     monsters = this.game.add.group();
@@ -215,6 +228,7 @@ var play_state = {
       new Tower(x, y, sprite, damage, range, fireRate, health, imortal, bulletSpeed, price, bulletSprite);
     } else {
       // TODO - mensagem de sem dinheiro
+      console.log('Not enought money to buy tower');
     }
   },
 
@@ -224,7 +238,7 @@ var play_state = {
 
   checkWaveEnd: function () {
     // TODO - verificar se todos os monstros ja morreram e iniciar proxima onda
-    if (waveMonsters == 0) {
+    if (waveMonsters === 0) {
       this.newWave();
     }
   },
